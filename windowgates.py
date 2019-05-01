@@ -20,19 +20,19 @@ class WindowFrame:
             self.width = 5 + len(name)
 
     def body(self, line):
-        return '| ' + line + ' |\n'
+        return '│ ' + line + ' │\n'
 
     def header(self):
-        res = '+' + '-' * (self.width + 2) + '+\n'
-        res += '| {}'.format(self.name) + ' ' * (self.width - len(self.name) - 5)
-        res += 'o o o |\n'
-        res += '+' + '-' * (self.width + 2) + '+\n'
+        res = '┌' + '─' * (self.width + 2) + '┐\n'
+        res += '│ {}'.format(self.name) + ' ' * (self.width - len(self.name) - 5)
+        res += 'o o o │\n'
+        res += '├' + '─' * (self.width + 2) + '┤\n'
         return res
 
     def footer(self):
-        return '+' + '-' * (self.width + 2) + '+\n'
+        return '└' + '─' * (self.width + 2) + '┘\n'
 
-def enframe(matrix):
+def enframe(matrix, name):
     '''
     @param matrix: string array where all strings are of N length.
     @returns: string with the framed matrix within it.
@@ -41,7 +41,7 @@ def enframe(matrix):
     if frame_height == 0:
         return ''
     frame_width = len(matrix[0])
-    frame = WindowFrame("test", frame_width)
+    frame = WindowFrame(name, frame_width)
     result = ''
     result += frame.header()
     for i in range(frame_height):
@@ -49,7 +49,7 @@ def enframe(matrix):
     result += frame.footer()
     return result
 
-def makeWindow(contents):
+def makeWindow(contents, name):
     '''
     @param contents: string with the full content of the window.
     '''
@@ -60,7 +60,7 @@ def makeWindow(contents):
         width = max(width, len(line))
     for i, line in enumerate(matrix):
         matrix[i] += ' '*(width-len(line))
-    result = enframe(matrix)
+    result = enframe(matrix, name)
     print(result)
 
 def main():
@@ -81,7 +81,7 @@ def main():
         print('Error: Unknown error {}'.format(e))
         sys.exit(-1)
 
-    makeWindow(text)
+    makeWindow(text, filename)
 
 if __name__ == '__main__':
     main()
