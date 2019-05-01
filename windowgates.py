@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 '''
+Author: kati256
+Email: katithebizz (at) gmail.com
+
 This is a script to auto generate ascii windows for whatever reason
 one has.
 
@@ -12,6 +15,14 @@ a window to stdout with the file's contents
 import sys
 
 class WindowFrame:
+    '''
+    The purpose of this class is to hold the data used in generating the frames
+    using these three methods it's easy to make different frames, which I might or
+    might not do at some point.
+
+    All methods except init (for obvious reasons) return the string piece
+    of the frame.
+    '''
     def __init__(self, name, width):
         self.name = name
         if width > 5 + len(name):
@@ -20,6 +31,9 @@ class WindowFrame:
             self.width = 5 + len(name)
 
     def body(self, line):
+        '''
+        @param line: the line to be used in the body.
+        '''
         return '│ ' + line + ' │\n'
 
     def header(self):
