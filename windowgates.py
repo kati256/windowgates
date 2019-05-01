@@ -20,6 +20,8 @@ def makeWindow(contents):
     height = len(matrix)
     for line in matrix:
         width = max(width, len(line))
+    for i, line in enumerate(matrix):
+        matrix[i] += ' '*(width-len(line))
     print('The window will have contents of {}x{}'.format(width, height))
 
 def main():
