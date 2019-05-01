@@ -11,6 +11,17 @@ a window to stdout with the file's contents
 
 import sys
 
+def makeWindow(contents):
+    '''
+    @param contents: string with the full content of the window.
+    '''
+    matrix = contents.split('\n')
+    width = 0
+    height = len(matrix)
+    for line in matrix:
+        width = max(width, len(line))
+    print('The window will have contents of {}x{}'.format(width, height))
+
 def main():
     args = sys.argv
     if len(args) < 3 or args[1] != '-f':
@@ -29,7 +40,7 @@ def main():
         print('Error: Unknown error {}'.format(e))
         sys.exit(-1)
 
-    print(text)
+    makeWindow(text)
 
 if __name__ == '__main__':
     main()
