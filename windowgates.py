@@ -11,6 +11,22 @@ a window to stdout with the file's contents
 
 import sys
 
+def enframe(matrix):
+    '''
+    @param matrix: string array where all strings are of N length.
+    @returns: string with the framed matrix within it.
+    '''
+    frame_height = len(matrix)
+    if frame_height == 0:
+        return ''
+    frame_width = len(matrix[0])
+    result = ''
+    result += '+' + '-' * frame_width + '+\n'
+    for i in range(frame_height):
+        result += '|' + matrix[i] + '|\n'
+    result += '+' + '-' * frame_width + '+\n'
+    return result
+
 def makeWindow(contents):
     '''
     @param contents: string with the full content of the window.
@@ -22,7 +38,8 @@ def makeWindow(contents):
         width = max(width, len(line))
     for i, line in enumerate(matrix):
         matrix[i] += ' '*(width-len(line))
-    print('The window will have contents of {}x{}'.format(width, height))
+    result = enframe(matrix)
+    print(result)
 
 def main():
     args = sys.argv
