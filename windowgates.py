@@ -14,7 +14,10 @@ import sys
 class WindowFrame:
     def __init__(self, name, width):
         self.name = name
-        self.width = width
+        if width > 5 + len(name):
+            self.width = width
+        else:
+            self.width = 5 + len(name)
 
     def body(self, line):
         return '| ' + line + ' |\n'
