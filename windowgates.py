@@ -11,6 +11,24 @@ a window to stdout with the file's contents
 
 import sys
 
+class WindowFrame:
+    def __init__(self, name, width):
+        self.name = name
+        self.width = width
+
+    def body(self, line):
+        return '| ' + line + ' |\n'
+
+    def header(self):
+        res = '+' + '-' * (self.width + 2) + '+\n'
+        res += '| {}'.format(self.name) + ' ' * (self.width - len(self.name) - 5)
+        res += 'o o o |\n'
+        res += '+' + '-' * (self.width + 2) + '+\n'
+        return res
+
+    def footer(self):
+        return '+' + '-' * (self.width + 2) + '+\n'
+
 def enframe(matrix):
     '''
     @param matrix: string array where all strings are of N length.
@@ -20,11 +38,12 @@ def enframe(matrix):
     if frame_height == 0:
         return ''
     frame_width = len(matrix[0])
+    frame = WindowFrame("test", frame_width)
     result = ''
-    result += '+' + '-' * frame_width + '+\n'
+    result += frame.header()
     for i in range(frame_height):
-        result += '|' + matrix[i] + '|\n'
-    result += '+' + '-' * frame_width + '+\n'
+        result += frame.body(matrix[i])
+    result += frame.footer()
     return result
 
 def makeWindow(contents):
