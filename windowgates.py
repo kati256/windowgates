@@ -21,14 +21,13 @@ def main():
     try:
         inputFile = open(filename, 'r')
         text = inputFile.read()
+        inputFile.close()
     except IOError as e:
         print('Error: Failed to open file {}. {}'.format(filename, e))
         sys.exit(-1)
-    except e:
+    except Exception as e:
         print('Error: Unknown error {}'.format(e))
         sys.exit(-1)
-    finally:
-        inputFile.close()
 
     print(text)
 
