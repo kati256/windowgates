@@ -14,6 +14,7 @@ a window to stdout with the file's contents
 
 import sys
 
+
 class WindowFrame:
     '''
     The purpose of this class is to hold the data used in generating the frames
@@ -46,6 +47,7 @@ class WindowFrame:
     def footer(self):
         return '└' + '─' * (self.width + 2) + '┘\n'
 
+
 def enframe(matrix, framer):
     '''
     @param matrix: string array where all strings are of N length.
@@ -71,6 +73,7 @@ def standardizeInput(matrix):
         matrix[i] += ' '*(width-len(line))
     return (matrix, width)
 
+
 def makeWindow(contents, name):
     '''
     @param contents: string with the full content of the window.
@@ -79,6 +82,7 @@ def makeWindow(contents, name):
     (squared, width) = standardizeInput(matrix)
     result = enframe(squared, WindowFrame(name, width))
     print(result)
+
 
 def main():
     args = sys.argv
