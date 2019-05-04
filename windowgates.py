@@ -63,18 +63,22 @@ def enframe(matrix, name):
     result += frame.footer()
     return result
 
+
+def standardizeInput(matrix):
+    width = 0
+    for line in matrix:
+        width = max(width, len(line))
+    for i, line in enumerate(matrix):
+        matrix[i] += ' '*(width-len(line))
+    return matrix
+
 def makeWindow(contents, name):
     '''
     @param contents: string with the full content of the window.
     '''
     matrix = contents.split('\n')
-    width = 0
-    height = len(matrix)
-    for line in matrix:
-        width = max(width, len(line))
-    for i, line in enumerate(matrix):
-        matrix[i] += ' '*(width-len(line))
-    result = enframe(matrix, name)
+    squared = standardizeInput(matrix)
+    result = enframe(squared, name)
     print(result)
 
 def main():
