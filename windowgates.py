@@ -46,7 +46,7 @@ class WindowFrame:
     def footer(self):
         return '└' + '─' * (self.width + 2) + '┘\n'
 
-def enframe(matrix, name):
+def enframe(matrix, framer):
     '''
     @param matrix: string array where all strings are of N length.
     @returns: string with the framed matrix within it.
@@ -55,12 +55,11 @@ def enframe(matrix, name):
     if frame_height == 0:
         return ''
     frame_width = len(matrix[0])
-    frame = WindowFrame(name, frame_width)
     result = ''
-    result += frame.header()
+    result += framer.header()
     for i in range(frame_height):
-        result += frame.body(matrix[i])
-    result += frame.footer()
+        result += framer.body(matrix[i])
+    result += framer.footer()
     return result
 
 
@@ -70,15 +69,15 @@ def standardizeInput(matrix):
         width = max(width, len(line))
     for i, line in enumerate(matrix):
         matrix[i] += ' '*(width-len(line))
-    return matrix
+    return (matrix, width)
 
 def makeWindow(contents, name):
     '''
     @param contents: string with the full content of the window.
     '''
     matrix = contents.split('\n')
-    squared = standardizeInput(matrix)
-    result = enframe(squared, name)
+    (squared, width) = standardizeInput(matrix)
+    result = enframe(squared, WindowFrame(name, width))
     print(result)
 
 def main():
