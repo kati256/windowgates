@@ -35,7 +35,7 @@ class WindowFrame:
         '''
         @param line: the line to be used in the body.
         '''
-        return '│ ' + line + ' │\n'
+        return '│ ' + line + ' '*(self.width-len(line)) + ' │\n'
 
     def header(self):
         res = '┌' + '─' * (self.width + 2) + '┐\n'
